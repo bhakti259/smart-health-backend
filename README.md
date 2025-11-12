@@ -76,9 +76,10 @@ uvicorn backend.app.main:app --reload --port 8000
 ```
 
 The API will be available at:
-- **API**: http://localhost:8000
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+
+- **API**: <http://localhost:8000>
+- **Swagger UI**: <http://localhost:8000/docs>
+- **ReDoc**: <http://localhost:8000/redoc>
 
 ## 📡 API Endpoints
 
@@ -87,6 +88,7 @@ The API will be available at:
 **POST** `/api/predictions`
 
 Request body:
+
 ```json
 {
   "age": 45,
@@ -99,6 +101,7 @@ Request body:
 ```
 
 Response:
+
 ```json
 {
   "id": 1,
@@ -113,6 +116,7 @@ Response:
 **GET** `/api/predictions?limit=50`
 
 Response:
+
 ```json
 [
   {
@@ -129,12 +133,14 @@ Response:
 ## 📊 Database Schema
 
 ### Users Table
+
 - `id`: Primary key
 - `email`: User email
 - `hashed_password`: Encrypted password
 - `created_at`: Registration timestamp
 
 ### Measurements Table
+
 - `id`: Primary key
 - `user_id`: Foreign key to Users
 - `age`: User age
@@ -150,6 +156,7 @@ Response:
 ## 🧠 Machine Learning Model
 
 The prediction model uses:
+
 - **Algorithm**: Scikit-learn ML model
 - **Features**: Age, BMI, smoking status, alcohol consumption, exercise
 - **Output**: Risk score (0.0 to 1.0, where higher = higher risk)
@@ -157,7 +164,7 @@ The prediction model uses:
 
 ## 📁 Project Structure
 
-```
+```text
 smart-health-backend/
 ├── backend/
 │   └── app/

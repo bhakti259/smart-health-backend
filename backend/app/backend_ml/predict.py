@@ -1,6 +1,7 @@
 from pathlib import Path
 import joblib
 import numpy as np
+import pandas as pd
 
 MODEL_FILE = Path(__file__).parent / "model.pkl"
 
@@ -31,6 +32,12 @@ def predict_risk(features: dict) -> float:
         features.get("alcohol_units_per_week", 0),
         features.get("exercise_hours_per_week", 0.0)
     ]])
-    probs = _model.predict_proba(arr)
+    
+    # Convert to DataFrame with feature names matching training
+    # Model was trained with: age, bmi, smoker, alcohol, exercise
+    feature_names = ["age", "bmi", "smoker", "alcohol", "exercise"]
+    df = pd.DataFrame(arr, columns=feature_names)
+    
+    probs = _model.predict_proba(df)
     # probability of class 1 (high risk)
     return float(probs[0,1])
