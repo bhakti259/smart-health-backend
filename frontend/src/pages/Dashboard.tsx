@@ -27,7 +27,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <PredictionForm onNewMeasurement={(m: any) => {
+      <PredictionForm onNewMeasurement={() => {
         // prepend new measurement from API (optional)
         fetchHistory();
       }} />

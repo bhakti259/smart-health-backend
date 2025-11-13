@@ -5,19 +5,25 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 ## ✨ Features
 
 - **Health Risk Prediction API**: ML-powered risk assessment based on user health data
+- **JWT Authentication**: Secure token-based authentication with auto-logout
 - **RESTful API**: Built with FastAPI for high performance and automatic documentation
 - **Database Management**: SQLModel + SQLite for data persistence
 - **Machine Learning**: Scikit-learn based prediction model
 - **Auto-generated API Docs**: Interactive Swagger UI and ReDoc
+- **Docker Support**: Containerized deployment with Docker & Docker Compose
+- **Session Management**: Token expiration tracking with frontend integration
 
 ## 🛠️ Tech Stack
 
 - **Framework**: FastAPI 0.101.0
+- **Authentication**: JWT (python-jose)
+- **Password Hashing**: SHA256
 - **Server**: Uvicorn 0.23.2
 - **ORM**: SQLModel 0.0.14
 - **Database**: SQLite (via SQLAlchemy 2.0.44)
 - **ML**: Scikit-learn 1.3.2, Pandas 2.2.2, NumPy 1.26.4
 - **Python Version**: 3.12.6
+- **Container**: Docker & Docker Compose
 
 ## 📋 Prerequisites
 
@@ -81,7 +87,51 @@ The API will be available at:
 - **Swagger UI**: <http://localhost:8000/docs>
 - **ReDoc**: <http://localhost:8000/redoc>
 
-## 📡 API Endpoints
+## 🐳 Docker Deployment
+
+For containerized deployment using Docker, see [DOCKER.md](./DOCKER.md)
+
+Quick start with Docker Compose (runs both backend and frontend):
+
+```bash
+# Build and run both services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+```
+
+Access the application:
+- **Frontend**: http://localhost
+- **Backend API**: http://localhost:8000/docs
+
+## �📡 API Endpoints
+
+### Authentication
+
+**POST** `/api/login`
+
+Request (form data):
+```
+username: admin
+password: admin123
+```
+
+Response:
+```json
+{
+  "access_token": "eyJhbGc...",
+  "token_type": "bearer"
+}
+```
+
+### Protected Endpoints
+
+All `/api/predictions` endpoints require JWT authentication.
+Include in headers: `Authorization: Bearer <token>`
 
 ### Create Health Risk Prediction
 
@@ -167,17 +217,24 @@ The prediction model uses:
 ```text
 smart-health-backend/
 ├── backend/
+│   ├── Dockerfile                 # Docker configuration
 │   └── app/
 │       ├── api/
-│       │   └── predictions.py      # Prediction endpoints
+│       │   └── predictions.py     # Prediction endpoints
 │       ├── backend_ml/
-│       │   ├── train.py           # Model training script
-│       │   └── predict.py         # Prediction logic
-│       ├── db.py                  # Database session management
-│       ├── init_db.py             # Database initialization
-│       ├── main.py                # FastAPI application
-│       └── models.py              # SQLModel schemas
+│       │   ├── train.py          # Model training script
+│       │   └── predict.py        # Prediction logic
+│       ├── auth.py               # JWT authentication
+│       ├── db.py                 # Database session management
+│       ├── init_db.py            # Database initialization
+│       ├── main.py               # FastAPI application
+│       ├── models.py             # SQLModel schemas
+│       └── schemas.py            # Pydantic schemas
+├── frontend/                     # React frontend application
+├── .dockerignore
 ├── .gitignore
+├── docker-compose.yml            # Docker Compose configuration
+├── DOCKER.md                     # Docker deployment guide
 ├── requirements.txt
 └── README.md
 ```

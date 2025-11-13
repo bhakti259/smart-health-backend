@@ -13,7 +13,14 @@ app = FastAPI(title="Smart Health - Backend")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # Frontend URL
+    allow_origins=[
+        "http://localhost:5173",      # Vite dev server
+        "http://127.0.0.1:5173",      # Vite dev server
+        "http://localhost",           # Frontend Docker container
+        "http://127.0.0.1",           # Frontend Docker container
+        "http://localhost:80",        # Frontend Docker container with port
+        "http://127.0.0.1:80",        # Frontend Docker container with port
+    ],
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods (GET, POST, OPTIONS, etc.)
     allow_headers=["*"],  # Allow all headers
