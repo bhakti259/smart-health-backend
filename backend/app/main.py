@@ -30,7 +30,10 @@ app.add_middleware(
 @app.on_event("startup")
 def on_startup():
     init_db.init_db()
-    
+
+@app.post("/api/healthcheck")
+def health_check():
+    return {"status": "ok"}
     
 @app.post("/api/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):

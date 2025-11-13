@@ -2,6 +2,12 @@
 
 A FastAPI-based backend service for health risk prediction using machine learning. This system analyzes user health metrics (age, BMI, lifestyle factors) to predict health risk scores.
 
+## 🌐 Live Demo
+
+**Production API**: [http://13.61.154.156:8000/docs](http://13.61.154.156:8000/docs)
+
+Deployed on AWS EC2 using Docker
+
 ## ✨ Features
 
 - **Health Risk Prediction API**: ML-powered risk assessment based on user health data
@@ -27,20 +33,67 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 
 ## 📋 Prerequisites
 
+**Option 1: Docker (Recommended - Easiest)**
+- Docker Desktop installed
+- No Python installation needed!
+
+**Option 2: Local Development**
 - Python 3.12+
 - pip
 - Virtual environment (recommended)
 
 ## 🚀 Quick Start
 
-### 1. Clone the Repository
+### Option 1: Using Docker (Recommended - Production Ready) 🐳
+
+The easiest way to run the application is using our pre-built Docker image from Docker Hub:
+
+```bash
+# Pull the image from Docker Hub
+docker pull bsk25/smart-health-backend:latest
+
+# Run the container (detached mode)
+docker run -d -p 8000:8000 --name smart-health-api bsk25/smart-health-backend:latest
+
+# Access the API
+# Backend: http://localhost:8000/docs
+
+# Useful commands:
+# docker ps                    # View running containers
+# docker logs smart-health-api # View container logs
+# docker stop smart-health-api # Stop the container
+# docker rm smart-health-api   # Remove the container
+```
+
+**Or use Docker Compose for full-stack (backend + frontend):**
+
+```bash
+# Clone the repository
+git clone https://github.com/bhakti259/smart-health-backend.git
+cd smart-health-backend
+
+# Start both backend and frontend
+docker-compose up -d
+
+# Access the application
+# Frontend: http://localhost
+# Backend API: http://localhost:8000/docs
+```
+
+For detailed Docker instructions, see [DOCKER.md](./DOCKER.md)
+
+---
+
+### Option 2: Local Development Setup
+
+#### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/bhakti259/smart-health-backend.git
 cd smart-health-backend
 ```
 
-### 2. Set Up Virtual Environment
+#### 2. Set Up Virtual Environment
 
 ```bash
 # Create virtual environment
@@ -105,10 +158,15 @@ docker-compose down
 ```
 
 Access the application:
-- **Frontend**: http://localhost
-- **Backend API**: http://localhost:8000/docs
 
-## �📡 API Endpoints
+- **Frontend**: <http://localhost>
+- **Backend API**: <http://localhost:8000/docs>
+
+For detailed Docker instructions and deployment options, see [DOCKER.md](./DOCKER.md)
+
+---
+
+## � API Endpoints
 
 ### Authentication
 
