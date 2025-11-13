@@ -10,10 +10,26 @@ const api = axios.create({
   },
 });
 
-// interceptor placeholder for JWT
+// JWT token interceptor
 api.interceptors.request.use((config) => {
-  // if you implement auth, add token: config.headers.Authorization = `Bearer ${token}`
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   return config;
 });
+
+// Handle 401 errors (unauthorized)
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

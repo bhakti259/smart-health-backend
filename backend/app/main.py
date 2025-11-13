@@ -25,7 +25,7 @@ def on_startup():
     init_db.init_db()
     
     
-@app.post("/login")
+@app.post("/api/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(form_data.username, form_data.password)
     if not user:
@@ -37,12 +37,12 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": token, "token_type": "bearer"}
 
 # Test endpoint to verify auth is working
-@app.get("/test-auth")
+@app.get("/api/test-auth")
 def test_auth(user: dict = Depends(get_current_user)):
     return {"message": "Authentication working!", "user": user}
 
 # Protected route - requires JWT authentication
-@app.post("/predict", response_model=HealthResponse)
+@app.post("/api/predict", response_model=HealthResponse)
 def predict_health(data: HealthInput, user: dict = Depends(get_current_user)):
     score = random.random()
     verdict = "Low Risk" if score < 0.5 else "High Risk"
