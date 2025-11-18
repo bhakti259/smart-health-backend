@@ -20,10 +20,14 @@ app.add_middleware(
         "http://127.0.0.1",           # Frontend Docker container
         "http://localhost:80",        # Frontend Docker container with port
         "http://127.0.0.1:80",        # Frontend Docker container with port
+        "https://d1shuzzoxjkkc4.cloudfront.net",  # Production CDN URL
+        "http://d1shuzzoxjkkc4.cloudfront.net"    # Production CDN URL (HTTP fallback)
     ],
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods (GET, POST, OPTIONS, etc.)
     allow_headers=["*"],  # Allow all headers
+    expose_headers=["*"],  # Expose all headers to the browser
+    max_age=3600,  # Cache preflight requests for 1 hour
 )
 
 # Ensure tables exist on startup (simple dev approach)
