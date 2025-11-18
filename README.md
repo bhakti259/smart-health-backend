@@ -4,11 +4,19 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 
 ## 🌐 Live Demo
 
-**Production API (HTTPS)**: [https://13.61.154.156/docs](https://13.61.154.156/docs)
+**Frontend (React App)**: [https://d1shuzzoxjkkc4.cloudfront.net/login](https://d1shuzzoxjkkc4.cloudfront.net/login)
 
-**Note**: Using self-signed SSL certificate. Your browser will show a security warning - this is expected. Click "Advanced" → "Proceed to site" to access the API.
+**Backend API (HTTPS)**: [https://13.61.154.156/docs](https://13.61.154.156/docs)
 
-Deployed on AWS EC2 using Docker with Nginx SSL reverse proxy
+**Demo Credentials:**
+- Username: `admin`
+- Password: `admin123`
+
+**Deployment:**
+- Frontend: AWS S3 + CloudFront CDN
+- Backend: AWS EC2 with Docker + Nginx SSL reverse proxy
+
+**Note**: Backend uses self-signed SSL certificate. Your browser will show a security warning - this is expected. Click "Advanced" → "Proceed to site" to access the API.
 
 ## ✨ Features
 
