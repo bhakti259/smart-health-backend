@@ -18,7 +18,7 @@ export default function Login() {
 
     try {
       await login(username, password);
-      navigate('/');
+      navigate('/onboarding/step1');
     } catch (err: any) {
       setError(err.message || 'Login failed');
     } finally {

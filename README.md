@@ -23,6 +23,7 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 
 ## ✨ Features
 
+**Backend:**
 - **Health Risk Prediction API**: ML-powered risk assessment based on user health data
 - **JWT Authentication**: Secure token-based authentication with auto-logout
 - **RESTful API**: Built with FastAPI for high performance and automatic documentation
@@ -30,10 +31,24 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 - **Machine Learning**: Scikit-learn based prediction model
 - **Auto-generated API Docs**: Interactive Swagger UI and ReDoc
 - **Docker Support**: Containerized deployment with Docker & Docker Compose
-- **Session Management**: Token expiration tracking with frontend integration
+- **CORS Enabled**: Configured for cross-origin requests
+
+**Frontend:**
+- **User Authentication**: JWT-based login with session management
+- **Multi-Step Onboarding**: Beautiful 4-step onboarding flow
+  - Step 1: Basic Information (Age, Gender)
+  - Step 2: Body Metrics (Height, Weight)
+  - Step 3: Lifestyle & Health (Activity, Sleep, Smoker, Alcohol)
+  - Step 4: Summary Review
+- **Modern UI**: Tailwind CSS with gradient backgrounds and smooth animations
+- **Responsive Design**: Mobile-first approach with responsive layouts
+- **Session Tracking**: Auto-logout on token expiration
+- **Health Dashboard**: View prediction history and risk scores
+- **Data Visualization**: Chart.js integration for health trends
 
 ## 🛠️ Tech Stack
 
+**Backend:**
 - **Framework**: FastAPI 0.101.0
 - **Authentication**: JWT (python-jose)
 - **Password Hashing**: SHA256
@@ -44,16 +59,25 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 - **Python Version**: 3.12.6
 - **Container**: Docker & Docker Compose
 
+**Frontend:**
+- **Framework**: React 19.2.0 + TypeScript
+- **Build Tool**: Vite 7.2.2
+- **Routing**: React Router v6.30.1
+- **Styling**: Tailwind CSS v4.1.17
+- **Forms**: React Hook Form 7.66.1
+- **HTTP Client**: Axios 1.13.2
+- **Charts**: Chart.js 4.5.1 + React ChartJS 2
+- **State Management**: React Context API
+
 ## 📋 Prerequisites
 
 **Option 1: Docker (Recommended - Easiest)**
 - Docker Desktop installed
-- No Python installation needed!
+- No Python or Node.js installation needed!
 
 **Option 2: Local Development**
-- Python 3.12+
-- pip
-- Virtual environment (recommended)
+- **Backend**: Python 3.12+, pip, Virtual environment (recommended)
+- **Frontend**: Node.js 18+, npm
 
 ## 🚀 Quick Start
 
@@ -139,6 +163,7 @@ This creates the ML model file (`health_risk_model.pkl`) needed for predictions.
 
 ### 5. Run the Server
 
+**Backend:**
 ```bash
 # Using Python module
 python -m uvicorn backend.app.main:app --reload --port 8000
@@ -152,6 +177,25 @@ The API will be available at:
 - **API**: <http://localhost:8000>
 - **Swagger UI**: <http://localhost:8000/docs>
 - **ReDoc**: <http://localhost:8000/redoc>
+
+**Frontend:**
+```bash
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies (first time only)
+npm install
+
+# Start development server
+npm run dev
+```
+
+The frontend will be available at:
+- **Application**: <http://localhost:5173>
+
+**Login Credentials:**
+- Username: `admin`
+- Password: `admin123`
 
 ## 🐳 Docker Deployment
 
@@ -301,12 +345,38 @@ smart-health-backend/
 │       ├── main.py               # FastAPI application
 │       ├── models.py             # SQLModel schemas
 │       └── schemas.py            # Pydantic schemas
-├── frontend/                     # React frontend application
+├── frontend/
+│   ├── Dockerfile                # Frontend Docker config
+│   ├── nginx.conf               # Nginx configuration
+│   ├── public/                  # Static assets
+│   └── src/
+│       ├── api/
+│       │   └── api.ts          # API client
+│       ├── components/
+│       │   ├── Layout.tsx
+│       │   ├── PredictionForm.tsx
+│       │   ├── SessionTimer.tsx
+│       │   └── TrendCharts.tsx
+│       ├── context/
+│       │   ├── AuthContext.tsx  # Authentication state
+│       │   └── UserContext.tsx  # User onboarding data
+│       ├── pages/
+│       │   ├── Dashboard.tsx
+│       │   ├── History.tsx
+│       │   ├── Login.tsx
+│       │   └── onboarding/
+│       │       ├── Step1Basic.tsx
+│       │       ├── Step2Body.tsx
+│       │       ├── Step3LifeStyle.tsx
+│       │       └── Summary.tsx
+│       ├── App.tsx              # Main application
+│       ├── main.tsx             # Entry point
+│       └── index.css            # Tailwind CSS
 ├── .dockerignore
 ├── .gitignore
 ├── docker-compose.yml            # Docker Compose configuration
 ├── DOCKER.md                     # Docker deployment guide
-├── requirements.txt
+├── requirements.txt              # Python dependencies
 └── README.md
 ```
 
