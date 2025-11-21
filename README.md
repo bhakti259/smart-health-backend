@@ -1,6 +1,26 @@
-# 🏥 Smart Health Backend
+# 🏥 Smart Health - Healthcare Provider Dashboard
 
-A FastAPI-based backend service for health risk prediction using machine learning. This system analyzes user health metrics (age, BMI, lifestyle factors) to predict health risk scores.
+A full-stack health risk assessment platform designed for **healthcare providers** (doctors, clinics, hospitals) to monitor and manage patient health risks using machine learning predictions. The system enables healthcare professionals to conduct patient assessments, track population health trends, and identify high-risk patients requiring immediate attention.
+
+## 🎯 Use Case
+
+**Target Users**: Healthcare providers, medical clinics, hospitals, occupational health departments
+
+**Primary Purpose**: Population health management and patient risk stratification
+
+**Key Scenarios**:
+- 👨‍⚕️ **Medical Checkups**: Doctors assess patients during routine visits, instantly view risk scores
+- 🏥 **Clinic Management**: Track overall patient population health, identify trends
+- 🚨 **Risk Identification**: Automatically flag high-risk patients for follow-up care
+- 📊 **Health Analytics**: View risk distribution across patient base, monitor population metrics
+- 📋 **Patient Records**: Maintain historical health assessments for each patient
+
+**Workflow**:
+1. Healthcare provider logs into the dashboard
+2. Conducts patient assessment using 4-step onboarding form (age, body metrics, lifestyle)
+3. System calculates health risk score using ML model
+4. Dashboard displays patient in risk-categorized table (Low/Medium/High)
+5. Provider reviews population analytics and identifies patients needing intervention
 
 ## 🌐 Live Demo
 
@@ -21,6 +41,72 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 
 **Note**: Backend uses self-signed SSL certificate. Your browser may show a security warning on first visit - click "Advanced" → "Proceed to site" to access the API documentation.
 
+## 📊 Healthcare Provider Dashboard
+
+The frontend is designed as a **comprehensive patient management dashboard** for healthcare professionals:
+
+### Dashboard Overview
+![Dashboard Screenshot - Coming Soon]
+
+**Key Components**:
+
+1. **Statistics Overview Panel**
+   - 5 real-time metrics cards displaying:
+     - Total number of patients assessed
+     - High-risk patient count (Risk Score ≥ 0.7) - Red alert
+     - Medium-risk patient count (0.4 ≤ Risk Score < 0.7) - Yellow warning
+     - Low-risk patient count (Risk Score < 0.4) - Green safe
+     - Average risk score across entire patient population
+
+2. **Risk Distribution Visualization**
+   - Interactive bar chart showing patient distribution across risk categories
+   - Helps identify population health trends at a glance
+   - Color-coded for quick interpretation (Green/Yellow/Red)
+
+3. **Patient Assessment Table**
+   - Comprehensive list of all patient assessments
+   - Columns: Patient ID, Age, BMI, Risk Score, Risk Level (badge), Assessment Date
+   - Color-coded risk badges for instant visual identification
+   - Hover effects for better UX
+   - Sortable and searchable (future enhancement)
+
+4. **Patient Assessment Workflow**
+   - 4-step form wizard for conducting patient evaluations
+   - Auto-calculates BMI from height/weight
+   - Maps activity levels to exercise hours (Sedentary=0, Moderate=3, Active=7 hrs/week)
+   - Validates all inputs before submission
+   - Shows loading states and error messages
+
+### Risk Categorization Logic
+
+| Risk Level | Score Range | Color Code | Action Required |
+|------------|-------------|------------|-----------------|
+| **Low Risk** | 0.0 - 0.39 | 🟢 Green | Routine monitoring |
+| **Medium Risk** | 0.4 - 0.69 | 🟡 Yellow | Follow-up recommended |
+| **High Risk** | 0.7 - 1.0 | 🔴 Red | Immediate intervention |
+
+### Typical Use Flow
+
+```
+Healthcare Provider Login
+    ↓
+View Dashboard (Population Overview)
+    ↓
+Click "New Assessment" / Navigate to Onboarding
+    ↓
+Enter Patient Data (Steps 1-4)
+    ↓
+Review Summary & Submit
+    ↓
+Return to Dashboard (Updated Stats)
+    ↓
+Review Patient in Table with Risk Badge
+    ↓
+Identify High-Risk Patients
+    ↓
+Schedule Follow-up Care
+```
+
 ## ✨ Features
 
 **Backend:**
@@ -33,18 +119,22 @@ A FastAPI-based backend service for health risk prediction using machine learnin
 - **Docker Support**: Containerized deployment with Docker & Docker Compose
 - **CORS Enabled**: Configured for cross-origin requests
 
-**Frontend:**
-- **User Authentication**: JWT-based login with session management
-- **Multi-Step Onboarding**: Beautiful 4-step onboarding flow
+**Frontend (Healthcare Provider Dashboard):**
+- **Provider Authentication**: Secure JWT-based login for healthcare staff
+- **Patient Assessment Form**: 4-step onboarding wizard for conducting patient evaluations
   - Step 1: Basic Information (Age, Gender)
-  - Step 2: Body Metrics (Height, Weight)
-  - Step 3: Lifestyle & Health (Activity, Sleep, Smoker, Alcohol)
-  - Step 4: Summary Review
-- **Modern UI**: Tailwind CSS with gradient backgrounds and smooth animations
-- **Responsive Design**: Mobile-first approach with responsive layouts
-- **Session Tracking**: Auto-logout on token expiration
-- **Health Dashboard**: View prediction history and risk scores
-- **Data Visualization**: Chart.js integration for health trends
+  - Step 2: Body Metrics (Height, Weight → auto-calculates BMI)
+  - Step 3: Lifestyle & Health (Activity level, Sleep, Smoker, Alcohol consumption)
+  - Step 4: Summary Review & Submission
+- **Population Health Dashboard**:
+  - 📊 **Statistics Cards**: Total patients, High/Medium/Low risk counts, Average risk score
+  - 📈 **Risk Distribution Chart**: Bar chart showing patient risk categorization
+  - 📋 **Patient Assessment Table**: Sortable list with Patient ID, Age, BMI, Risk Score, Risk Level badges
+- **Modern UI**: Tailwind CSS with purple/indigo gradient theme, smooth animations
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Session Management**: Auto-logout on token expiration for security
+- **Real-time Updates**: Dashboard refreshes after each patient assessment
+- **Color-Coded Risk Levels**: Green (Low <0.4), Yellow (Medium 0.4-0.7), Red (High ≥0.7)
 
 ## 🛠️ Tech Stack
 
