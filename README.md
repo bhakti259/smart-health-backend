@@ -39,7 +39,27 @@ A full-stack health risk assessment platform designed for **healthcare providers
 - Backend: AWS EC2 with Docker + Nginx SSL reverse proxy
 - Database: SQLite (containerized)
 
-**Note**: Backend uses self-signed SSL certificate. Your browser may show a security warning on first visit - click "Advanced" → "Proceed to site" to access the API documentation.
+**⚠️ Important: SSL Certificate Setup (Required for Login)**
+
+The backend uses a **self-signed SSL certificate** for HTTPS. Before you can log in to the application, you must accept this certificate in your browser:
+
+**Steps to Accept Certificate:**
+1. Open a new browser tab
+2. Navigate to the backend API docs: [https://13.61.154.156/docs](https://13.61.154.156/docs)
+3. You'll see a security warning: "Your connection is not private"
+4. Click **"Advanced"** button
+5. Click **"Proceed to 13.61.154.156 (unsafe)"** or **"Accept the Risk and Continue"**
+6. You should now see the FastAPI Swagger documentation
+7. Return to the frontend app: [https://d1shuzzoxjkkc4.cloudfront.net](https://d1shuzzoxjkkc4.cloudfront.net)
+8. Login will now work with credentials: `admin` / `admin123`
+
+**Why is this necessary?**
+- The frontend (CloudFront) uses HTTPS with a trusted certificate
+- The backend (EC2) uses HTTPS with a self-signed certificate (not trusted by browsers)
+- Browsers block API calls to untrusted HTTPS endpoints for security
+- By visiting the backend URL directly and accepting the certificate, you tell your browser to trust it
+- This is a **one-time setup** per browser/device
+- In production, you would use a proper SSL certificate from Let's Encrypt or AWS Certificate Manager
 
 ## 📊 Healthcare Provider Dashboard
 
