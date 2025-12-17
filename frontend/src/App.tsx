@@ -6,10 +6,10 @@ import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import History from "./pages/History";
 import Login from "./pages/Login";
-import Step1Basic from "./pages/onboarding/step1Basic";
-import Step2Body from "./pages/onboarding/step2Body";
-import Step3LifeStyle from "./pages/onboarding/step3LifeStyle";
-import Summary from "./pages/onboarding/summary";
+import Step1Basic from "./pages/onboarding/Step1Basic";
+import Step2Body from "./pages/onboarding/Step2Body";
+import Step3LifeStyle from "./pages/onboarding/Step3LifeStyle";
+import Summary from "./pages/onboarding/Summary";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, loading } = useAuth();
